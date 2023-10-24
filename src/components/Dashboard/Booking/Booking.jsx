@@ -23,14 +23,14 @@ export default function Booking() {
   const [isShow, setIsShow] = useState(false);
 
   // eslint-disable-next-line no-unused-vars
-  const [token, setToken] = useLocalStorage('token', null);
+  const [token, setToken] = useLocalStorage('tokenOffline', null);
   const { isShowing, cpn, toggle } = useModal();
 
   const info = useMemo(() => {
     return {
       token: token,
       type: type.value,
-      check: 'seeding',
+      check: 'offline',
       limit: '',
       offset: '',
       start_date: '',

@@ -14,7 +14,7 @@ import CheckData from '@/components/Dashboard/CheckData';
 
 const ScreensRoot = () => {
   // eslint-disable-next-line no-unused-vars
-  const [token, setToken] = useLocalStorage('token', null);
+  const [token, setToken] = useLocalStorage('tokenOffline', null);
 
   return (
     <Router basename="/app/offline">
