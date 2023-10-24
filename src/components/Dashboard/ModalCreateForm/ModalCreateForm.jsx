@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import { useState, useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useGetCompany } from '@/services/formService';
+import { useGetCompany, useGetSource } from '@/services/formService';
 import { createFormFn } from '@/api/form';
 
 import Button from '@/components/UI/Button';
@@ -20,6 +20,7 @@ export default function ModalCreateForm({ isShowing, hide, element, token, refet
     note: '',
     script: '',
     interactive_proof: '',
+    code_utm_source: '',
   };
   // state search
   const [info, setInfo] = useState(initialInfo);
@@ -27,8 +28,10 @@ export default function ModalCreateForm({ isShowing, hide, element, token, refet
   const [companyFilter, setCompanyFilter] = useState([]);
   const [isShow, setIsShow] = useState(false);
   const [valueCompany, setValueCompany] = useState('');
+  const [keySource, setKeySource] = useState([]);
 
   const { dataCompany, isSuccessCompany } = useGetCompany(token);
+  const { dataSource, isSuccessSource } = useGetSource(token);
 
   useEffect(() => {
     if (isSuccessCompany) {
@@ -36,6 +39,12 @@ export default function ModalCreateForm({ isShowing, hide, element, token, refet
       setCompanyFilter(dataCompany.data.data);
     }
   }, [isSuccessCompany, dataCompany]);
+
+  useEffect(() => {
+    if (isSuccessSource) {
+      setKeySource(Object.keys(dataSource.data.data));
+    }
+  }, [isSuccessSource, dataSource]);
 
   const handleChange = (name) => (event) => {
     setInfo((prev) => ({ ...prev, [name]: event.target.value }));
@@ -52,7 +61,7 @@ export default function ModalCreateForm({ isShowing, hide, element, token, refet
   });
 
   const handleSubmit = () => {
-    if (!info.name || !info.phone || !info.service || !info.company_id) {
+    if (!info.name || !info.phone || !info.service || !info.company_id || !info.code_utm_source) {
       alert('Vui lòng nhập đầy đủ các trường bắt buộc!!!');
     } else {
       queryCreateForm.refetch();
@@ -257,6 +266,25 @@ export default function ModalCreateForm({ isShowing, hide, element, token, refet
                               value={info.interactive_proof}
                               onChange={handleChange('interactive_proof')}
                             />
+                          </div>
+                        </div>
+                        <div className="modal__formControl" style={{ marginTop: '15px' }}>
+                          <div className="modal__formGroup">
+                            <label htmlFor="script" className="modal__label">
+                              Nguồn <span style={{ color: 'red' }}>(*)</span>
+                            </label>
+                            <select
+                              value={info.code_utm_source}
+                              onChange={handleChange('code_utm_source')}
+                              className="modal__formSelect"
+                            >
+                              <option value="">Chọn nguồn</option>
+                              {keySource.map((item, index) => (
+                                <option key={index} value={item}>
+                                  {dataSource.data.data[item]}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         </div>
                         <div className="modal__formControl" style={{ marginTop: '15px' }}>
