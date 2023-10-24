@@ -27,14 +27,14 @@ export default function Form() {
   const [codeRemove, setCodeRemove] = useState('');
 
   // eslint-disable-next-line no-unused-vars
-  const [token, setToken] = useLocalStorage('token', null);
+  const [token, setToken] = useLocalStorage('tokenOffline', null);
   const { isShowing, cpn, toggle } = useModal();
 
   const info = useMemo(() => {
     return {
       token: token,
       brand_id: '',
-      type: 'seeding',
+      type: 'offline',
       limit: 0,
       offset: 0,
       company_id: '',

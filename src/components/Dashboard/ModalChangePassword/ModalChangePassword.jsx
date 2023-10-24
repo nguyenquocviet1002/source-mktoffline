@@ -7,7 +7,7 @@ import Button from '@/components/UI/Button';
 
 export default function ModalChangePassword({ isShowing, hide, element }) {
   // eslint-disable-next-line no-unused-vars
-  const [token, setToken] = useLocalStorage('token', null);
+  const [token, setToken] = useLocalStorage('tokenOffline', null);
 
   const initialPassword = {
     newPassword: '',

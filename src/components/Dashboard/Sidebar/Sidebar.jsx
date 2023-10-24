@@ -22,7 +22,7 @@ export default function Sidebar({ isShow, event, close }) {
     7: false,
   });
   // eslint-disable-next-line no-unused-vars
-  const [token, setToken] = useLocalStorage('token', null);
+  const [token, setToken] = useLocalStorage('tokenOffline', null);
   const { dataUser, isSuccessUser } = useGetUser(token);
   const { isShowing, cpn, toggle } = useModal();
   const navigate = useNavigate();
