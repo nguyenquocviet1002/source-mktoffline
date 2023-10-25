@@ -30,7 +30,7 @@ export default function Booking() {
     return {
       token: token,
       type: type.value,
-      check: 'offline',
+      check: 'seeding',
       limit: '',
       offset: '',
       start_date: '',

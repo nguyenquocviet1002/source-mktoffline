@@ -34,7 +34,7 @@ export default function Form() {
     return {
       token: token,
       brand_id: '',
-      type: 'offline',
+      type: 'seeding',
       limit: 0,
       offset: 0,
       company_id: '',
