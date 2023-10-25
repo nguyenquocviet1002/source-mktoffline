@@ -9,7 +9,7 @@ export default function ModalSearchBooking({ isShowing, hide, element, token, sh
     return {
       token: token,
       type: type,
-      check: 'offline',
+      check: 'seeding',
       limit: '',
       offset: '',
       start_date: '',
